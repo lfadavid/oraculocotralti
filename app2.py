@@ -67,7 +67,7 @@ dc_rec_mensal['Mes'] = dc_rec_mensal['Mes'].replace(traducao_meses)
 # Cria uma nova coluna com o valor formatado
 dc_rec_estado['Frete Peso Formatado'] = dc_rec_estado['Frete Peso'].apply(lambda x: f"R$ {x:,.2f}".replace(',', 'X').replace('.', ',').replace('X', '.'))
 
-aba1, aba2, aba3 = st.tabs(['Dataset', 'Receitas', 'Tabela de Preço'])
+aba1, aba2, aba3 = st.tabs(['Dataset', 'Informações Financeiras', 'Informações Gerais'])
 
 with aba1:
     st.dataframe(df_filtrado, use_container_width=True,
