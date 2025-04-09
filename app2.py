@@ -391,44 +391,44 @@ with aba3:
         )
     # Layout refinado   
     st.plotly_chart(grafico_dia_frete_peso, use_container_width=True)
+        
+    def formatar_toneladas(valor):
+        return f"{valor:,.2f} ton".replace(',', 'X').replace('.', ',').replace('X', '.')
     
-def formatar_toneladas(valor):
-    return f"{valor:,.2f} ton".replace(',', 'X').replace('.', ',').replace('X', '.')
-
-    # Prepara os dados ordenados e formata os rótulos
-top_peso_dia = df_rotas_peso[['sum']].sort_values('sum', ascending=False).head(7)
-top_peso_dia['sum_formatado'] = top_peso_dia['sum'].apply(formatar_toneladas)
-
-    # Adiciona coluna formatada ao df diário
-dc_rec_diaria_peso['Peso Taxado Formatado'] = dc_rec_diaria_peso['Peso Taxado'].apply(formatar_toneladas)
-
-    # Gráfico com valores formatados
-grafico_dia_peso = px.bar(
-        dc_rec_diaria_peso,
-        x='Data',
-        y='Peso Taxado',
-        text='Peso Taxado Formatado',  # Usa texto formatado
-        template='seaborn',
-        title='Volume de Peso por Dia',
-        color='Peso Taxado',
-        color_continuous_scale=px.colors.sequential.Plasma,
-        hover_data={'Peso Taxado Formatado': True, 'Peso Taxado': False, 'Data': True}
-    )
-
-    # Estilizar os rótulos dentro das barras
-grafico_dia_peso.update_traces(
-        texttemplate='<b>%{text}</b>',
-        textposition='inside',
-        insidetextanchor='start',
-        textfont=dict(color='white', size=12)
-    )
-
-    # Ajusta o tamanho da fonte do hover
-grafico_dia_peso.update_traces(
-        hoverlabel=dict(
-            font=dict(size=16)
+        # Prepara os dados ordenados e formata os rótulos
+    top_peso_dia = df_rotas_peso[['sum']].sort_values('sum', ascending=False).head(7)
+    top_peso_dia['sum_formatado'] = top_peso_dia['sum'].apply(formatar_toneladas)
+    
+        # Adiciona coluna formatada ao df diário
+    dc_rec_diaria_peso['Peso Taxado Formatado'] = dc_rec_diaria_peso['Peso Taxado'].apply(formatar_toneladas)
+    
+        # Gráfico com valores formatados
+    grafico_dia_peso = px.bar(
+            dc_rec_diaria_peso,
+            x='Data',
+            y='Peso Taxado',
+            text='Peso Taxado Formatado',  # Usa texto formatado
+            template='seaborn',
+            title='Volume de Peso por Dia',
+            color='Peso Taxado',
+            color_continuous_scale=px.colors.sequential.Plasma,
+            hover_data={'Peso Taxado Formatado': True, 'Peso Taxado': False, 'Data': True}
         )
-    )
-
-    # Layout refinado
-st.plotly_chart(grafico_dia_peso, use_container_width=True)
+    
+        # Estilizar os rótulos dentro das barras
+    grafico_dia_peso.update_traces(
+            texttemplate='<b>%{text}</b>',
+            textposition='inside',
+            insidetextanchor='start',
+            textfont=dict(color='white', size=12)
+        )
+    
+        # Ajusta o tamanho da fonte do hover
+    grafico_dia_peso.update_traces(
+            hoverlabel=dict(
+                font=dict(size=16)
+            )
+        )
+    
+        # Layout refinado
+    st.plotly_chart(grafico_dia_peso, use_container_width=True)
